@@ -1,34 +1,46 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Button, TextField, Modal, Box } from "@material-ui/core";
 import { connect } from "react-redux";
 import * as actions from "../redux/actions/user.actions";
 import store from "../redux/store";
+import SignUpModal from "./SignUpModal";
+import api from '../utils/api'
 
 function Header(props) {
-  const [showSearch, setShowSearch]
+  const [showSearch, setShowSearch] = useState(false)
+	const [showSignUp, setShowSignUp] = useState(false)
   const showSearchField = () => {
-    
+    setShowSearch(true)
   }
+	const submitSignUp = async () => {
+		setShowSignUp(false)
+		await api.post('/sign-up', props.signUpData)
+	}
 	const displayDesktop = () => {
 		return (
-			<Toolbar>
-				Recommend.Me
-				<Button color="inherit" onClick={() => console.log(1)}>
-					Show recommendations
-				</Button>
-				<Button
-					color="inherit"
-					onClick={() => {
-						props.registerUser(123);
-						console.log(store.getState());
-					}}
-				>
-					Sign Up
-				</Button>
-				<Button color="inherit" onClick={() => console.log(3)}>
-					Sign In
-				</Button>
-			</Toolbar>
+			<>
+				<SignUpModal open={showSignUp} handler={submitSignUp}></SignUpModal>
+				<Toolbar>
+					Recommend.Me
+					{ showSearch ?
+						<TextField id="standard-basic" label="Standard" variant="standard" /> :
+						<Button color="inherit" onClick={setShowSearch}>
+							Show recommendations
+						</Button>
+					}
+					<Button
+						color="inherit"
+						onClick={() => {
+							setShowSignUp(true)
+						}}
+					>
+						Sign Up
+					</Button>
+					<Button color="inherit" onClick={() => console.log(3)}>
+						Sign In
+					</Button>
+				</Toolbar>
+			</>
 		);
 	};
 	return (

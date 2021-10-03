@@ -6,9 +6,14 @@ class Api {
 		return response;
 	}
 
-	post() {}
+	async post(endpoint, body) {
+		const response = await axios.post(`${API_URL}/${endpoint}`, { body })
+		return response
+	}
 
 	put() {}
 
 	delete() {}
 }
+
+export default new Api()
