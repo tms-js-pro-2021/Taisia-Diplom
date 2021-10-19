@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "body": {
+        "email": "a@gmail.com",
+        "password": "123",
+        "confirmPassword": "123"
+      },
+      "id": 1
+    },
+    {
+      "body": {
+        "email": "b@gmail.com",
+        "password": "123",
+        "confirmPassword": "123"
+      },
+      "id": 2
+    },
+    {
+      "email": "a",
+      "password": "1",
+      "confirmPassword": "1",
+      "id": 3
+    }
+  ],
+  "hello": {
+    "message": "Hello"
+  }
+}
