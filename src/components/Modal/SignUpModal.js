@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { connect } from "react-redux";
-import * as actions from "../../redux/actions/app.actions";
+import * as appActions from "../../redux/actions/app.actions";
+import * as userActions from "../../redux/actions/user.actions";
 import { authService } from "../../utils/api";
 
 const style = {
@@ -29,7 +30,11 @@ function SignUpModal(props) {
 	const handleClose = () => props.setModalType(null);
 
 	const registerHandler = async () => {
-		await authService.register(loginData);
+		const user = await authService.register(loginData);
+
+		props.authUser(user.id);
+
+		handleClose();
 	};
 
 	const inputHandler = (event) => {
@@ -85,6 +90,9 @@ function SignUpModal(props) {
 	);
 }
 
-const mstp = (state) => ({ modalType: state.appReducer.modalType });
+const mstp = (state) => ({
+	modalType: state.appReducer.modalType,
+	userId: state.userReducer.userId,
+});
 
-export default connect(mstp, { ...actions })(SignUpModal);
+export default connect(mstp, { ...userActions, ...appActions })(SignUpModal);

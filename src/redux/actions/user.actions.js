@@ -1,3 +1,3 @@
 import createAction from "../../utils/createAction";
 
-export const registerUser = createAction("REGISTER_USER");
+export const authUser = createAction("AUTH_USER");

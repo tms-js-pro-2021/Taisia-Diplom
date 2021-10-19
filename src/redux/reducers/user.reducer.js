@@ -1,14 +1,14 @@
 const initialState = {
-	user_registration: false,
+	userId: null,
 };
 
 export default function userReducer(state = initialState, action) {
 	switch (action.type) {
-		case "REGISTER_USER":
+		case "AUTH_USER":
 			console.log(action.payload);
 			return {
 				...state,
-				user_registration: true,
+				userId: action.payload,
 			};
 		default:
 			return state;
