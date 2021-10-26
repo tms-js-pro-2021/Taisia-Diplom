@@ -21,19 +21,29 @@ const style = {
 };
 
 function AddRecModal(props) {
-	const [loginData, setLoginData] = React.useState({
-		email: "",
-		password: "",
-		confirmPassword: "",
+	const [addTitle, setAddTitle] = React.useState({
+		categoryName: "",
+		productName: "",
+		productDescription: "",
 	});
 	const handleClose = () => props.setModalType(null);
 
 	const inputHandler = (event) => {
-		setLoginData({
-			...loginData,
+		setAddTitle({
+			...addTitle,
 			[event.target.name]: event.target.value,
 		});
-		console.log(loginData);
+	};
+
+	const addRecommendationHandler = async () => {
+		const addRec = await authService.addRecommendation({
+			...addTitle,
+			userId: props.userId,
+		});
+
+		console.log(addRec);
+
+		handleClose();
 	};
 
 	return (
@@ -52,30 +62,35 @@ function AddRecModal(props) {
 						id="outlined-basic"
 						onChange={inputHandler}
 						label="Category Name"
-						name="CategoryName"
+						name="categoryName"
 						variant="outlined"
 					/>
 					<TextField
 						id="outlined-basic"
 						onChange={inputHandler}
 						label="Recommendation Name"
-						name="RecommendationName"
+						name="productName"
 						variant="outlined"
 					/>
 					<TextField
 						id="outlined-basic"
 						onChange={inputHandler}
 						label="Description"
-						name="Description"
+						name="productDescription"
 						variant="outlined"
 					/>
-					<Button variant="contained">Confirm</Button>
+					<Button variant="contained" onClick={addRecommendationHandler}>
+						Confirm
+					</Button>
 				</Box>
 			</Modal>
 		</div>
 	);
 }
 
-const mstp = (state) => ({ modalType: state.appReducer.modalType });
+const mstp = (state) => ({
+	modalType: state.appReducer.modalType,
+	userId: state.userReducer.userId,
+});
 
 export default connect(mstp, { ...actions })(AddRecModal);

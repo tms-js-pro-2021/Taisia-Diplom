@@ -43,8 +43,8 @@ class AuthService {
 		}
 	}
 
-	async hello() {
-		const response = await api.get("hello");
+	async addRecommendation(data) {
+		const response = await api.post("recommendations", data);
 
 		return response;
 	}

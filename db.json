@@ -59,9 +59,36 @@
       "email": "g",
       "password": "2",
       "confirmPassword": "3"
+    },
+    {
+      "id": "499b9f69-396b-4e26-af46-232e2de73df4",
+      "email": "tsukishimataisey@gmail.com",
+      "password": "44",
+      "confirmPassword": "44"
     }
   ],
   "hello": {
     "message": "Hello"
-  }
+  },
+  "recommendations": [
+    {
+      "categoryName": "music",
+      "productName": "hello",
+      "productDescription": "greate song",
+      "id": 1
+    },
+    {
+      "categoryName": "films",
+      "productName": "night",
+      "productDescription": "nice film",
+      "id": 2
+    },
+    {
+      "categoryName": "fgfg",
+      "productName": "aaa",
+      "productDescription": "dddd",
+      "userId": "499b9f69-396b-4e26-af46-232e2de73df4",
+      "id": 3
+    }
+  ]
 }

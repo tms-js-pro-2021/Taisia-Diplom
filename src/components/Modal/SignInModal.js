@@ -21,7 +21,7 @@ const style = {
 	p: 4,
 };
 
-function SignUpModal(props) {
+function SignInModal(props) {
 	const handleClose = () => props.setModalType(null);
 
 	const [loginData, setLoginData] = React.useState({
@@ -32,7 +32,7 @@ function SignUpModal(props) {
 	const loginHandler = async () => {
 		const login = await authService.login(loginData);
 
-		props.authUser(login.id);
+		props.authUser(login[0].id);
 
 		handleClose();
 	};
@@ -81,4 +81,4 @@ function SignUpModal(props) {
 
 const mstp = (state) => ({ modalType: state.appReducer.modalType });
 
-export default connect(mstp, { ...appActions, ...userActions })(SignUpModal);
+export default connect(mstp, { ...appActions, ...userActions })(SignInModal);

@@ -33,6 +33,14 @@ const bottomMenuItems = [
 ];
 
 function SideMenu(props) {
+	const checkUserAuthentication = () => {
+		console.log(props.userId);
+		if (props.userId) {
+			return props.setModalType("addRecommendation");
+		} else {
+			return alert("Please, sign in first!");
+		}
+	};
 	const bottomMenuItems = [
 		{
 			text: "Sign Up",
@@ -46,7 +54,7 @@ function SideMenu(props) {
 		},
 		{
 			text: "Add Recommendation",
-			handler: () => props.setModalType("addRecommendation"),
+			handler: checkUserAuthentication,
 			icon: () => <AddIcon />,
 		},
 	];
@@ -89,6 +97,9 @@ function SideMenu(props) {
 	);
 }
 
-const mstp = (state) => ({ sideMenu: state.appReducer.sideMenu });
+const mstp = (state) => ({
+	sideMenu: state.appReducer.sideMenu,
+	userId: state.userReducer.userId,
+});
 
 export default connect(mstp, { ...actions })(SideMenu);
