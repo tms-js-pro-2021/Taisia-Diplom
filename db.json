@@ -74,21 +74,44 @@
     {
       "categoryName": "music",
       "productName": "hello",
-      "productDescription": "greate song",
+      "productDescription": "great song",
+      "userId": "499b9f69-396b-4e26-af46-232e2de73df4",
       "id": 1
     },
     {
       "categoryName": "films",
       "productName": "night",
       "productDescription": "nice film",
+      "userId": "499b9f69-396b-4e26-af46-232e2de73df4",
       "id": 2
     },
     {
-      "categoryName": "fgfg",
-      "productName": "aaa",
-      "productDescription": "dddd",
+      "categoryName": "books",
+      "productName": "fire",
+      "productDescription": "my favorite book",
       "userId": "499b9f69-396b-4e26-af46-232e2de73df4",
       "id": 3
+    },
+    {
+      "categoryName": "food",
+      "productName": "potato",
+      "productDescription": "the best food ever!!!!",
+      "userId": "fa3eec80-cd59-413b-8430-07656a6e47d5",
+      "id": 4
+    },
+    {
+      "categoryName": "anime",
+      "productName": "naruto",
+      "productDescription": "the ending sucks but anime great",
+      "userId": "fa3eec80-cd59-413b-8430-07656a6e47d5",
+      "id": 5
+    },
+    {
+      "categoryName": "films",
+      "productName": "paper",
+      "productDescription": "recommended",
+      "userId": "499b9f69-396b-4e26-af46-232e2de73df4",
+      "id": 6
     }
   ]
 }

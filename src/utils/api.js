@@ -48,6 +48,11 @@ class AuthService {
 
 		return response;
 	}
+
+	async getRecommendation() {
+		const response = await api.get("recommendations");
+		return response.data;
+	}
 }
 
 export const authService = new AuthService();
