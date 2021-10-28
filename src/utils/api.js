@@ -31,12 +31,24 @@ class AuthService {
 		}
 	}
 
+	async checkAuth() {
+		const user = localStorage.getItem("user");
+		if (user) {
+			const response = await api.get(`users?id=${user}`);
+
+			if (response) {
+				return response.data;
+			}
+		}
+	}
+
 	async login(loginData) {
 		const response = await api.get(`users?email=${loginData.email}`);
 		if (
 			loginData.password === response.data[0].password &&
 			loginData.email === response.data[0].email
 		) {
+			localStorage.setItem("user", response.data[0].id);
 			return response.data;
 		} else {
 			return false;

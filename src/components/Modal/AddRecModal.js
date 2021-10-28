@@ -5,8 +5,13 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { connect } from "react-redux";
-import * as actions from "../../redux/actions/app.actions";
+import * as appActions from "../../redux/actions/app.actions";
+import * as userActions from "../../redux/actions/user.actions";
 import { authService } from "../../utils/api";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const style = {
 	position: "absolute",
@@ -20,7 +25,21 @@ const style = {
 	p: 4,
 };
 
+const categories = {
+	books: "Books",
+	films: "Films",
+	anime: "Anime",
+	music: "Music",
+	food: "Food",
+};
+
 function AddRecModal(props) {
+	const [categoryName, setCategory] = React.useState("");
+
+	const handleChange = (event) => {
+		setCategory(event.target.value);
+	};
+
 	const [addTitle, setAddTitle] = React.useState({
 		categoryName: "",
 		productName: "",
@@ -36,12 +55,15 @@ function AddRecModal(props) {
 	};
 
 	const addRecommendationHandler = async () => {
-		const addRec = await authService.addRecommendation({
+		await authService.addRecommendation({
 			...addTitle,
+			categoryName,
 			userId: props.userId,
 		});
 
-		console.log(addRec);
+		const data = await authService.getRecommendation();
+
+		props.addRecommendation(data);
 
 		handleClose();
 	};
@@ -58,13 +80,25 @@ function AddRecModal(props) {
 					<Typography id="modal-modal-title" variant="h6" component="h2">
 						Add your recommendation
 					</Typography>
-					<TextField
-						id="outlined-basic"
-						onChange={inputHandler}
-						label="Category Name"
-						name="categoryName"
-						variant="outlined"
-					/>
+					<Box sx={{ minWidth: 120 }}>
+						<FormControl fullWidth>
+							<InputLabel id="demo-simple-select-label">Category</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								value={categoryName}
+								label="Category Name"
+								name="categoryName"
+								onChange={handleChange}
+							>
+								<MenuItem value={categories.films}>Films</MenuItem>
+								<MenuItem value={categories.anime}>Anime</MenuItem>
+								<MenuItem value={categories.music}>Music</MenuItem>
+								<MenuItem value={categories.books}>Books</MenuItem>
+								<MenuItem value={categories.food}>Food</MenuItem>
+							</Select>
+						</FormControl>
+					</Box>
 					<TextField
 						id="outlined-basic"
 						onChange={inputHandler}
@@ -93,4 +127,4 @@ const mstp = (state) => ({
 	userId: state.userReducer.userId,
 });
 
-export default connect(mstp, { ...actions })(AddRecModal);
+export default connect(mstp, { ...appActions, ...userActions })(AddRecModal);
